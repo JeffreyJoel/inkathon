@@ -1,4 +1,5 @@
 import { Metadata, Viewport } from 'next'
+import { Gluten } from 'next/font/google'
 import { PropsWithChildren } from 'react'
 
 import { Analytics } from '@vercel/analytics/react'
@@ -17,6 +18,12 @@ export const viewport: Viewport = {
   themeColor: '#000000',
   colorScheme: 'dark',
 }
+
+const gluten = Gluten({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-gluten',
+})
 
 export const metadata: Metadata = {
   title: 'ink!athon Boilerplate',
@@ -45,7 +52,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en" className={cn('dark', GeistSans.variable, GeistMono.variable)}>
+    <html lang="en" className={cn('dark', GeistSans.variable, gluten.variable, GeistMono.variable)}>
       <body>
         <ClientProviders>
           <TooltipProvider>{children}</TooltipProvider>
