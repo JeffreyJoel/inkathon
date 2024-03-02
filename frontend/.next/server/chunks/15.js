@@ -1,0 +1,1 @@
+"use strict";exports.id=15,exports.ids=[15],exports.modules={7015:(e,s,t)=>{t.d(s,{address:()=>r});let r="5DhCVg3QmsPXPpYBGGPerVfnopMUSr49L3eMKmetmJkLfpot"}};
