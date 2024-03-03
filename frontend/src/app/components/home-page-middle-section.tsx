@@ -8,14 +8,14 @@ import { Fade } from 'react-awesome-reveal'
 
 import { Button } from '@/components/ui/button'
 
-import heroImg from '../../../public/images/bananas.png'
+import heroImg from '../../../public/images/staking.avif'
 
 export const gluten = Gluten({ subsets: ['latin'] })
 
 export const HomeMidSection: FC = () => {
   return (
     <>
-      <section className="mt-10">
+      <section className="container mt-10">
         {/* <Image
           src={landingBg}
           alt=""
@@ -39,9 +39,8 @@ export const HomeMidSection: FC = () => {
             </Fade>
             <Fade direction="right">
               <p className="md:text-xllg:mb-8 mb-6 max-w-2xl font-mono font-light text-gray-500 lg:text-2xl">
-                A comprehensive web3 development platform that enables users to onboard with
-                wallets, create and deploy smart contracts and enhance app scalability through
-                robust infrastructure.
+                Harness the unparalleled power of Polkadot, the innovative blockchain platform that
+                redefines the possibilities of token creation and deployment.
               </p>
             </Fade>
 

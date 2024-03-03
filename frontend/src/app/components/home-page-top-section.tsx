@@ -2,6 +2,7 @@
 
 import { Gluten } from 'next/font/google'
 import Image from 'next/image'
+import Link from 'next/link'
 import { FC } from 'react'
 
 import { Variants, motion } from 'framer-motion'
@@ -56,7 +57,7 @@ export const HomeTopSection: FC = () => {
 
   return (
     <>
-      <section className="mt-10">
+      <section className="container mt-10">
         <Image
           src={landingBg}
           alt=""
@@ -99,14 +100,24 @@ export const HomeTopSection: FC = () => {
               </Button> */}
               <Fade direction="left">
                 {' '}
-                <Button
+                <Link href="/dashboard">
+                  <Button
+                    variant={'default'}
+                    // className="h-12 min-w-[4rem] gap-2 rounded-xl border border-white/10 bg-primary px-4 py-3 font-bold text-foreground lg:min-w-[8rem] lg:rounded-2xl"
+                    className="h-12 min-w-[4rem] gap-2 rounded-xl border border-white/10  px-4 py-3 font-bold text-foreground lg:min-w-[8rem] lg:rounded-2xl"
+                    translate="no"
+                  >
+                    Get Started
+                  </Button>
+                </Link>
+                {/* <Button
                   variant={'default'}
                   // className="h-12 min-w-[4rem] gap-2 rounded-xl border border-white/10 bg-primary px-4 py-3 font-bold text-foreground lg:min-w-[8rem] lg:rounded-2xl"
                   className="h-12 min-w-[4rem] gap-2 rounded-xl border border-white/10  px-4 py-3 font-bold text-foreground lg:min-w-[8rem] lg:rounded-2xl"
                   translate="no"
                 >
                   Get Started
-                </Button>
+                </Button> */}
               </Fade>
             </motion.div>
           </div>

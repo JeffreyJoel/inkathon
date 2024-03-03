@@ -22,7 +22,7 @@ export default function HomePage() {
   return (
     <>
       <NavBar />
-      <div className="blob container relative flex grow flex-col items-center justify-center py-10">
+      <div className="blob  relative flex grow flex-col items-center justify-center py-10">
         {/* Title */}
         {/* <HomePageTitle /> */}
         <HomeTopSection />
