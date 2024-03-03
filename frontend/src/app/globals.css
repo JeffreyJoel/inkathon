@@ -80,5 +80,8 @@
 
   .blob {
     background-image: url('../assets/Hero-bg.png');
+    background-repeat: space;
+    background-size: contain;
+    background-position: top;
   }
 }
