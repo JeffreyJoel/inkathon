@@ -26,15 +26,15 @@ const gluten = Gluten({
 })
 
 export const metadata: Metadata = {
-  title: 'ink!athon Boilerplate',
-  description: 'Full-Stack DApp Boilerplate for ink! Smart Contracts',
+  title: 'Badger',
+  description: 'Spin up web3 projects fast on Polkadot',
   metadataBase: new URL(env.url),
   robots: env.isProduction ? 'all' : 'noindex,nofollow',
   openGraph: {
     type: 'website',
     locale: 'en',
     url: env.url,
-    siteName: 'ink!athon Boilerplate',
+    siteName: 'Badger',
     images: [
       {
         url: '/images/inkathon-og-banner.jpg',
