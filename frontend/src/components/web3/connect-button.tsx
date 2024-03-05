@@ -74,7 +74,7 @@ export const ConnectButton: FC<ConnectButtonProps> = () => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
-            className="h-12 min-w-[14rem] gap-2 rounded-2xl border border-white/10 bg-primary px-4 py-3 font-bold text-foreground"
+            className="h-12 min-w-[4rem] gap-2 rounded-xl border border-white/10 bg-primary px-4 py-3 font-bold text-foreground lg:min-w-[8rem] lg:rounded-2xl"
             isLoading={isConnecting}
             disabled={isConnecting}
             translate="no"
@@ -119,9 +119,9 @@ export const ConnectButton: FC<ConnectButtonProps> = () => {
       <DropdownMenu>
         <DropdownMenuTrigger
           asChild
-          className="rounded-2xl bg-gray-900 px-4 py-6 font-bold text-foreground"
+          className="rounded-2xl bg-gray-900 px-2 py-6 font-bold text-foreground lg:px-4"
         >
-          <Button className="min-w-[14rem] border" translate="no">
+          <Button className="min-w-[12rem] border lg:min-w-[14rem]" translate="no">
             <div className="flex items-center justify-between gap-2">
               <div className="flex flex-col items-center justify-center">
                 <AccountName account={activeAccount} />
@@ -201,7 +201,7 @@ export const ConnectButton: FC<ConnectButtonProps> = () => {
 
       {/* Account Balance */}
       {reducibleBalanceFormatted !== undefined && (
-        <div className="flex min-w-[10rem] items-center justify-center gap-2 rounded-2xl border bg-gray-900 px-4 py-3 font-mono text-sm font-bold text-foreground">
+        <div className="hidden min-w-[10rem] items-center justify-center gap-2 rounded-2xl border bg-gray-900 px-4 py-3 font-mono text-sm font-bold text-foreground lg:flex">
           {reducibleBalanceFormatted}
           {(!reducibleBalance || reducibleBalance?.isZero()) && (
             <Tooltip>

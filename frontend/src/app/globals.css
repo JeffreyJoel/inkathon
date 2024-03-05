@@ -77,4 +77,11 @@
     @apply bg-background font-sans text-foreground;
     @apply flex h-screen min-h-screen flex-col;
   }
+
+  .blob {
+    background-image: url('../assets/Hero-bg.png');
+    background-repeat: space;
+    background-size: contain;
+    background-position: top;
+  }
 }

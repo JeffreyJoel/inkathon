@@ -1,4 +1,5 @@
 import { Metadata, Viewport } from 'next'
+import { Gluten } from 'next/font/google'
 import { PropsWithChildren } from 'react'
 
 import { Analytics } from '@vercel/analytics/react'
@@ -18,16 +19,22 @@ export const viewport: Viewport = {
   colorScheme: 'dark',
 }
 
+const gluten = Gluten({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-gluten',
+})
+
 export const metadata: Metadata = {
-  title: 'ink!athon Boilerplate',
-  description: 'Full-Stack DApp Boilerplate for ink! Smart Contracts',
+  title: 'Badger',
+  description: 'Spin up web3 projects fast on Polkadot',
   metadataBase: new URL(env.url),
   robots: env.isProduction ? 'all' : 'noindex,nofollow',
   openGraph: {
     type: 'website',
     locale: 'en',
     url: env.url,
-    siteName: 'ink!athon Boilerplate',
+    siteName: 'Badger',
     images: [
       {
         url: '/images/inkathon-og-banner.jpg',
@@ -45,7 +52,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en" className={cn('dark', GeistSans.variable, GeistMono.variable)}>
+    <html lang="en" className={cn('dark', GeistSans.variable, gluten.variable, GeistMono.variable)}>
       <body>
         <ClientProviders>
           <TooltipProvider>{children}</TooltipProvider>
