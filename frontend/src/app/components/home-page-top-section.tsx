@@ -124,7 +124,13 @@ export const HomeTopSection: FC = () => {
           <div className=" lg:col-span-5 lg:mt-0 lg:flex">
             {/* <img src={hero} alt="heroimage"/> */}
             <Fade direction="right">
-              <Image src={heroImg} alt="" width={400} height={400} className="h-[90%] w-[90%]" />
+              <Image
+                src={heroImg}
+                alt=""
+                width={400}
+                height={400}
+                className="w-[60%] lg:h-[90%] lg:w-[90%]"
+              />
             </Fade>
           </div>
         </div>

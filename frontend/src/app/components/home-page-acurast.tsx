@@ -15,7 +15,7 @@ export const gluten = Gluten({ subsets: ['latin'] })
 export const HomeAcurastSection: FC = () => {
   return (
     <>
-      <section className="container mt-6">
+      <section className="container mt-0 sm:mt-6">
         {/* <Image
           src={landingBg}
           alt=""
@@ -53,7 +53,13 @@ export const HomeAcurastSection: FC = () => {
           </div>
           <div className=" lg:col-span-5 lg:mt-0 lg:flex">
             <Fade direction="right">
-              <Image src={heroImg} alt="" width={500} height={500} className="h-[95%] w-[95%]" />
+              <Image
+                src={heroImg}
+                alt=""
+                width={500}
+                height={500}
+                className="w-[60%] lg:h-[95%] lg:w-[95%]"
+              />
             </Fade>
           </div>
         </div>
