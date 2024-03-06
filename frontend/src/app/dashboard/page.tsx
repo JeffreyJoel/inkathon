@@ -16,7 +16,7 @@ const Marketplace = () => {
     <>
       <NavBar isDashboard={true} />
       <div className="relative mt-24">
-        <nav className=" absolute left-0 right-0 mx-auto mb-4 w-full border">
+        <nav className=" fixed left-0 right-0 mx-auto mb-4 w-full border bg-background">
           <div className="container px-3 py-3 lg:px-5 lg:pl-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center justify-start rtl:justify-end">
