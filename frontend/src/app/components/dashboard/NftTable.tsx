@@ -24,12 +24,12 @@ export function NftTable() {
           <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
             <th
               scope="row"
-              className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
+              className="cursor-pointer whitespace-nowrap px-6 py-4 font-medium text-blue-600 underline"
             >
               JeffToken
             </th>
             <td className="px-6 py-4">JTK</td>
-            <td className="px-6 py-4">0xe2ac869Ae6066e8Ae59aAA43747e3A9Ec402254E</td>
+            <td className="px-6 py-4">0xe2ac869...02254E</td>
             <td className="px-6 py-4">$2999</td>
           </tr>
         </tbody>

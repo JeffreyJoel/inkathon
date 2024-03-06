@@ -61,3 +61,49 @@ export function TokenSelection() {
     </Dialog>
   )
 }
+
+export function CreateToken() {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <button
+          className={`mr-2 rounded border bg-white px-4 py-2 font-sans text-sm font-semibold  text-gray-900 no-underline focus:outline-none`}
+        >
+          Create
+        </button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px] md:max-w-[550px]">
+        <DialogHeader>
+          <DialogTitle>Create Token</DialogTitle>
+          <DialogDescription>
+            {/* Make changes to your profile here. Click save when you are done. */}
+            Parameters the contract specifies to be passed in during deployment.
+          </DialogDescription>
+        </DialogHeader>
+        <div className=" py-4">
+          <div className="mb-5 items-center gap-4">
+            <Label htmlFor="name" className=" text-right">
+              Name
+            </Label>
+            <Input id="name" value="" className="mt-2" />
+          </div>
+          <div className=" items-center gap-4">
+            <Label htmlFor="symbol" className="text-right">
+              Symbol
+            </Label>
+            <Input id="symbol" value="" className="mt-2" />
+          </div>
+          <div className="mb-5 items-center gap-4">
+            <Label htmlFor="description" className="text-right">
+              Description
+            </Label>
+            <Input id="description" value="" className="mt-2" />
+          </div>
+        </div>
+        <DialogFooter>
+          <Button type="submit">Deploy</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
+}
