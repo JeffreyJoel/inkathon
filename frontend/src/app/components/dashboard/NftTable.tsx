@@ -24,7 +24,7 @@ export function NftTable() {
           <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
             <th
               scope="row"
-              className="cursor-pointer whitespace-nowrap px-6 py-4 font-medium text-blue-600 underline"
+              className="cursor-pointer whitespace-nowrap px-6 py-4 font-medium text-blue-600 "
             >
               JeffToken
             </th>

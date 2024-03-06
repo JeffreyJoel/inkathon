@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 
-import { CreateNFT, NFTSelection } from './NFTSelection'
-import { NftTable } from './NftTable'
-import { CreateToken, TokenSelection } from './TokenSelction'
-import { TokenTable } from './TokenTable'
+import { NFTOverview } from './NFTOverview'
+import { NFTSelection } from './NFTSelection'
+import { TokenOverview } from './TokenOverview'
+import { TokenSelection } from './TokenSelction'
 
 export function OverviewComponent() {
   const [contractCreated, setContractCreated] = useState(true)
@@ -49,25 +49,9 @@ export function OverviewComponent() {
             </div>
           </div>
 
-          <div className="mt-20">
-            <div className="align-center mb-5 flex justify-between">
-              <h3 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Token Contracts
-              </h3>
-              <CreateToken />
-            </div>
-            <TokenTable />
-          </div>
+          <TokenOverview />
 
-          <div className="mt-16">
-            <div className="align-center mb-5 flex justify-between">
-              <h3 className=" text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                NFT Contracts
-              </h3>
-              <CreateNFT />
-            </div>
-            <NftTable />
-          </div>
+          <NFTOverview />
         </div>
       )}
     </div>

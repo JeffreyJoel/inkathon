@@ -24,12 +24,12 @@ export function TokenTable() {
           <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
             <th
               scope="row"
-              className="cursor-pointer whitespace-nowrap px-6 py-4 font-medium text-blue-600 underline"
+              className="cursor-pointer whitespace-nowrap px-6 py-4 font-medium text-blue-600 "
             >
               JeffToken
             </th>
             <td className="px-6 py-4">JTK</td>
-            <td className="px-6 py-4">0xe2ac869Ae...c402254E</td>
+            <td className="px-6 py-4">0xe2ac869Ae...2254E</td>
             <td className="px-6 py-4">$2999</td>
           </tr>
         </tbody>
