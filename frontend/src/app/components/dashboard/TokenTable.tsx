@@ -1,6 +1,6 @@
 'use client'
 
-export function NftTable() {
+export function TokenTable() {
   return (
     <div className="relative overflow-x-auto rounded">
       <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
@@ -12,7 +12,7 @@ export function NftTable() {
             <th scope="col" className="px-6 py-3">
               Symbol
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-6 py-3 ">
               Address
             </th>
             <th scope="col" className="px-6 py-3">
