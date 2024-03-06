@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import { NFTsComponent } from '../components/dashboard/NFTsComponent'
 import { TokensComponent } from '../components/dashboard/TokensCOmponent'
+import { OverviewComponent } from '../components/dashboard/overview'
 import { NavBar } from '../components/nav-bar'
 
 // import tableDataTopCreators from 'variables/nfts/marketplace/tableDataTopCreators';
@@ -268,7 +269,7 @@ const Marketplace = () => {
 
         <div className="p-4 sm:container sm:mx-auto">
           <div>
-            {tab == 0 ? <NFTsComponent /> : ''}
+            {tab == 0 ? <OverviewComponent /> : ''}
             {tab == 1 ? <TokensComponent /> : ''}
             {tab == 2 ? <NFTsComponent /> : ''}
           </div>
