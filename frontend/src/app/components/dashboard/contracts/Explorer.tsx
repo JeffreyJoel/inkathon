@@ -19,7 +19,7 @@ export const Explorer = () => {
         <div className="w-1/3 rounded border border-gray-600 ">
           <div className="flex w-full border-b border-gray-400  text-gray-200">
             <span
-              className={`w-1/2 cursor-pointer px-4 py-2 text-center ${tab === 0 ? 'border-b-2 border-gray-300' : 'border-0'}`}
+              className={`w-1/2 cursor-pointer px-4 py-2 text-center  font-bold ${tab === 0 ? 'border-b-2 border-gray-300' : 'border-0'}`}
               onClick={() => {
                 setTab(0)
               }}
@@ -27,7 +27,7 @@ export const Explorer = () => {
               Write
             </span>
             <span
-              className={`w-1/2 cursor-pointer px-4 py-2 text-center ${tab === 1 ? 'border-b-2 border-gray-300' : 'border-0'}`}
+              className={`w-1/2 cursor-pointer px-4 py-2 text-center font-bold ${tab === 1 ? 'border-b-2 border-gray-300' : 'border-0'}`}
               onClick={() => {
                 setTab(1)
               }}
