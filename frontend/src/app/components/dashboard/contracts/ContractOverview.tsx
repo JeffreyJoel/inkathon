@@ -1,6 +1,6 @@
 export function ContractOverview() {
   return (
-    <div className="mt-10">
+    <div className="mt-4">
       {/* <div className="mb-10 border-b border-gray-700 pb-6">
         <div className="mb-3 flex items-center">
           <h1 className="mr-2 text-2xl font-bold">JeffToken</h1>
@@ -61,10 +61,10 @@ export function ContractOverview() {
                   JeffToken
                 </th>
                 <td scope="row" className="px-6 py-4">
-                  JTK
+                  Mint
                 </td>
                 <td scope="row" className="px-6 py-4">
-                  0xe2ac869...02254E
+                  1FRMM...hV24fg
                 </td>
               </tr>
             </tbody>

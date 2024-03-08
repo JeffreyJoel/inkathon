@@ -14,8 +14,8 @@ export const Explorer = () => {
 
   return (
     <>
-      <h2 className="mb-4 text-2xl font-bold">Explorer</h2>
-      <div className="explorer mt-10  flex gap-8">
+      <h2 className="mb-2 text-2xl font-bold">Explorer</h2>
+      <div className="explorer mt-6  flex gap-8">
         <div className="w-1/3 rounded border border-gray-600 ">
           <div className="flex w-full border-b border-gray-400  text-gray-200">
             <span

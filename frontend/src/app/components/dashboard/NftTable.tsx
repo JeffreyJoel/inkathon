@@ -29,7 +29,7 @@ export function NftTable() {
               JeffToken
             </th>
             <td className="px-6 py-4">JTK</td>
-            <td className="px-6 py-4">0xe2ac869...02254E</td>
+            <td className="px-6 py-4">1FRMM...hV24fg</td>
             <td className="px-6 py-4">$2999</td>
           </tr>
         </tbody>
