@@ -1,6 +1,9 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
+
 export function TokenTable() {
+  const router = useRouter()
   return (
     <div className="relative overflow-x-auto rounded">
       <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
@@ -25,6 +28,9 @@ export function TokenTable() {
             <th
               scope="row"
               className="cursor-pointer whitespace-nowrap px-6 py-4 font-medium text-blue-600 "
+              onClick={() => {
+                router.push(`/dashboard/contracts/${1}`)
+              }}
             >
               JeffToken
             </th>

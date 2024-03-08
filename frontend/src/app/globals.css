@@ -81,7 +81,8 @@
   .blob {
     background-image: url('../assets/Hero-bg.png');
     background-repeat: space;
-    background-size: contain;
+    background-size: cover;
     background-position: top;
+    background-attachment: fixed;
   }
 }
