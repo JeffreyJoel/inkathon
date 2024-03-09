@@ -143,8 +143,8 @@ export const ConnectButton: FC<ConnectButtonProps> = () => {
           {/* Supported Chains */}
           {supportedChains.map((chain) => (
             <DropdownMenuItem
-              disabled={chain.network === activeChain?.network}
-              className={chain.network !== activeChain?.network ? 'cursor-pointer' : ''}
+              disabled={chain?.network === activeChain?.network}
+              className={chain?.network !== activeChain?.network ? 'cursor-pointer' : ''}
               key={chain.network}
               onClick={async () => {
                 await switchActiveChain?.(chain)
