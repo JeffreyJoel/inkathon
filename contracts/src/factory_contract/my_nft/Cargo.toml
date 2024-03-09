@@ -15,7 +15,7 @@ scale-info = { version = "2.6", default-features = false, features = ["derive"],
 # openbrush = { git = "https://github.com/Brushfam/openbrush-contracts", default-features = false, features = ["psp22"] }
 # # openbrush = { git = "https://github.com/Brushfam/openbrush-contracts", branch = "develop", default-features = false }
 
-psp34 = { path = "../../PSP34", default-features = false, features = ["ink-as-dependency"] }
+psp34 = { git = "https://github.com/Cardinal-Cryptography/PSP34", default-features = false, features = [] }
 
 
 [lib]
