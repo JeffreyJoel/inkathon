@@ -1,4 +1,4 @@
 [workspace]
 
 resolver = "1"
-members = ["src/factory_contract", "src/PSP22", "src/PSP34"]
+members = ["src/factory_contract", "src/PSP34"]
