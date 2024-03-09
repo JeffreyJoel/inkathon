@@ -21,6 +21,8 @@ const main = async () => {
   // Deploy greeter contract
   const { abi, wasm } = await getDeploymentData('greeter')
   const greeter = await deployContract(api, account, abi, wasm, 'default', [])
+  const psp22 = await deployContract(api, account, abi, wasm, 'default', [])
+  const psp34 = await deployContract(api, account, abi, wasm, 'default', [])
 
   // Write contract addresses to `{contract}/{network}.ts` file(s)
   await writeContractAddresses(chain.network, {
