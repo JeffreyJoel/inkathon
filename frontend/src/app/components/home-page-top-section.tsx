@@ -69,11 +69,11 @@ export const HomeTopSection: FC = () => {
           <div className="mr-auto place-self-center lg:col-span-7">
             {' '}
             <Fade direction="left">
-              <h1 className="mb-4 max-w-3xl text-5xl font-extrabold leading-none tracking-tight text-white md:text-5xl xl:text-6xl">
+              <h1 className="mb-4 max-w-3xl text-4xl font-extrabold leading-none tracking-tight text-white lg:text-5xl xl:text-6xl">
                 Spin up web3 projects fast on Polkadot with
                 <br />
                 <span
-                  className={`text-5xl font-semibold text-primary md:text-5xl xl:text-6xl ${gluten.className}`}
+                  className={`text-4xl font-semibold text-primary  lg:text-5xl xl:text-6xl ${gluten.className}`}
                 >
                   Badger
                 </span>
@@ -81,7 +81,7 @@ export const HomeTopSection: FC = () => {
             </Fade>
             <Fade direction="left">
               {' '}
-              <p className="md:text-xllg:mb-8 mb-6 max-w-2xl font-mono font-light text-gray-500 lg:text-2xl">
+              <p className="mb-6 max-w-2xl font-mono font-light text-gray-500 md:text-xl lg:mb-8 lg:text-2xl">
                 A comprehensive web3 development platform that enables users to onboard with
                 wallets, create and deploy smart contracts and enhance app scalability through
                 robust infrastructure.
@@ -129,7 +129,7 @@ export const HomeTopSection: FC = () => {
                 alt=""
                 width={400}
                 height={400}
-                className="w-[60%] lg:h-[90%] lg:w-[90%]"
+                className="w-[100%] md:w-[60%] lg:h-[90%] lg:w-[90%]"
               />
             </Fade>
           </div>

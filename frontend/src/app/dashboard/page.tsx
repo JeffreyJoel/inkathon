@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import { NFTsComponent } from '../components/dashboard/NFTsComponent'
 import { TokensComponent } from '../components/dashboard/TokensCOmponent'
+import { OverviewComponent } from '../components/dashboard/overview'
 import { NavBar } from '../components/nav-bar'
 
 // import tableDataTopCreators from 'variables/nfts/marketplace/tableDataTopCreators';
@@ -15,7 +16,7 @@ const Marketplace = () => {
     <>
       <NavBar isDashboard={true} />
       <div className="relative mt-24">
-        <nav className=" absolute left-0 right-0 mx-auto mb-4 w-full border">
+        <nav className=" fixed left-0 right-0 mx-auto mb-4 w-full border bg-background">
           <div className="container px-3 py-3 lg:px-5 lg:pl-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center justify-start rtl:justify-end">
@@ -268,7 +269,7 @@ const Marketplace = () => {
 
         <div className="p-4 sm:container sm:mx-auto">
           <div>
-            {tab == 0 ? <NFTsComponent /> : ''}
+            {tab == 0 ? <OverviewComponent /> : ''}
             {tab == 1 ? <TokensComponent /> : ''}
             {tab == 2 ? <NFTsComponent /> : ''}
           </div>
