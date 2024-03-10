@@ -1,4 +1,4 @@
-export function ContractOverview({ handleViewEvents }: { handleViewEvents: any }) {
+export function ContractOverview() {
   return (
     <div className="mt-4">
       {/* <div className="mb-10 border-b border-gray-700 pb-6">
@@ -40,9 +40,9 @@ export function ContractOverview({ handleViewEvents }: { handleViewEvents: any }
           <h2 className="mb-4 text-2xl font-bold">Events</h2>
           <p
             className="cursor-pointer text-sm font-bold text-blue-500 underline"
-            onClick={() => {
-              handleViewEvents
-            }}
+            // onClick={() => {
+            //   handleViewEvents
+            // }}
           >
             View all
           </p>
