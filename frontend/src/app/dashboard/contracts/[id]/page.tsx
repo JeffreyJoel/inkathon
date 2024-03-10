@@ -232,7 +232,7 @@ const SingleContract = ({ params }: { params: { id: string } }) => {
             ) : (
               ''
             )}
-            {tab == 3 ? <Explorer /> : ''}
+            {tab == 3 ? <Explorer metadata={tokenMedata} /> : ''}
           </div>
         </div>
       </div>

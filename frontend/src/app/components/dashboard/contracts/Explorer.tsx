@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { ExplorerFunctions } from './ExplorerFunctions'
 
-export const Explorer = () => {
+export const Explorer = ({ metadata }: { metadata: any }) => {
   const [tab, setTab] = useState(0)
   const [currentFunction, setCurrentFunction] = useState('')
 
@@ -145,13 +145,16 @@ export const Explorer = () => {
             ) : currentFunction === 'balanceOf' ? (
               <ExplorerFunctions who />
             ) : currentFunction === 'totalSupply' ? (
-              <ExplorerFunctions view={'totalSupply'} viewValue={'10000000'} />
+              <ExplorerFunctions view={'totalSupply'} viewValue={metadata?.supply?.toString()} />
             ) : currentFunction === 'decimals' ? (
-              <ExplorerFunctions view={'decimals'} viewValue={'16'} />
+              <ExplorerFunctions
+                view={'decimals'}
+                viewValue={Number(metadata?.decimal).toString()}
+              />
             ) : currentFunction === 'name' ? (
-              <ExplorerFunctions view={'name'} viewValue={'JeffToken'} />
+              <ExplorerFunctions view={'name'} viewValue={metadata?.name} />
             ) : currentFunction === 'symbol' ? (
-              <ExplorerFunctions view={'symbol'} viewValue={'JTK'} />
+              <ExplorerFunctions view={'symbol'} viewValue={metadata?.symbol} />
             ) : (
               ''
             )}
