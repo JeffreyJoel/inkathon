@@ -32,19 +32,6 @@ export default function HomePage() {
         <HomeMidSection />
 
         <HomeAcurastSection />
-        {/* <HomeTopSection />
-        <HomeTopSection /> */}
-
-        {/* Connect Wallet Button */}
-        {/* <ConnectButton /> */}
-
-        {/* <div className="mt-12 flex w-full flex-wrap items-start justify-center gap-4"> */}
-        {/* Chain Metadata Information */}
-        {/* <ChainInfo /> */}
-
-        {/* Greeter Read/Write Contract Interactions */}
-        {/* <GreeterContractInteractions /> */}
-        {/* </div> */}
       </div>
     </>
   )

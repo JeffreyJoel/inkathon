@@ -2,13 +2,13 @@
 
 import { useState } from 'react'
 
+import { NFTSelection } from './CreateNFT'
+import { TokenSelection } from './CreateToken'
 import { NFTOverview } from './NFTOverview'
-import { NFTSelection } from './NFTSelection'
 import { TokenOverview } from './TokenOverview'
-import { TokenSelection } from './TokenSelction'
 
 export function OverviewComponent() {
-  const [contractCreated, setContractCreated] = useState(true)
+  const [contractCreated, setContractCreated] = useState(false)
 
   return (
     <div className="mt-14 rounded-lg  border-dashed border-gray-200 p-8  dark:border-gray-700">
