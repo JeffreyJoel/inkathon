@@ -17,6 +17,11 @@ export const ExplorerFunctions = ({
   who,
   view,
   viewValue,
+  handleAllowance,
+  handleApproval,
+  handleBalanceOf,
+  handleTransfer,
+  handleTransferFrom,
 }: {
   from?: boolean
   to?: boolean
@@ -26,9 +31,22 @@ export const ExplorerFunctions = ({
   who?: boolean
   view?: string
   viewValue?: string
+  handleAllowance?: (who: string, spender: string) => Promise<number>
+  handleApproval?: (spender: string, value: string) => Promise<boolean>
+  handleBalanceOf?: (address: string) => Promise<number>
+  handleTransfer?: (to: string, value: string, data: []) => Promise<boolean>
+  handleTransferFrom?: (from: string, to: string, value: string, data: []) => Promise<boolean>
 }) => {
   const [tab, setTab] = useState(0)
   const [currentFunction, setCurrentFunction] = useState('')
+
+  const handleRun = () => {
+    // handleAllowance && handleAllowance()
+    // handleApproval && handleApproval()
+    // handleBalanceOf && handleBalanceOf()
+    // handleTransfer && handleTransfer()
+    // handleTransferFrom && handleTransferFrom()
+  }
 
   return (
     <>
@@ -117,6 +135,7 @@ export const ExplorerFunctions = ({
           // type="submit"
           onClick={() => {
             // createToken(inputValues)
+            handleRun()
           }}
         >
           Run

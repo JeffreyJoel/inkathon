@@ -2,14 +2,65 @@
 
 import { useState } from 'react'
 
+import { ContractIds } from '@/deployments/deployments'
+import TokenContract from '@inkathon/contracts/typed-contracts/contracts/my_psp'
+import { AccountId } from '@inkathon/contracts/typed-contracts/types-arguments/factory_contract'
+import { useInkathon, useRegisteredTypedContract } from '@scio-labs/use-inkathon'
+
 import { ExplorerFunctions } from './ExplorerFunctions'
 
-export const Explorer = () => {
+export const Explorer = ({ metadata }: { metadata: any }) => {
   const [tab, setTab] = useState(0)
   const [currentFunction, setCurrentFunction] = useState('')
-
+  const { api, activeAccount, activeSigner } = useInkathon()
+  const tokenAddress = useRegisteredTypedContract(ContractIds.Psp22, TokenContract)
   const handleSetCurrentFunction = (id: string) => {
     setCurrentFunction(id)
+  }
+
+  const handleBalanceOf = async (address: string): Promise<number> => {
+    if (!metadata?.address) return 0
+    const result = await tokenAddress.typedContract
+      ?.withAddress(`${metadata?.address}`)
+      .query.balanceOf(address as AccountId)
+    return Number(result?.value.ok)
+  }
+
+  const handleAllowance = async (who: string, spender: string): Promise<number> => {
+    if (!metadata?.address) return 0
+    const result = await tokenAddress.typedContract
+      ?.withAddress(`${metadata?.address}`)
+      .query.allowance(who as AccountId, spender as AccountId)
+    return Number(result?.value.ok)
+  }
+
+  const handleTransfer = async (to: string, value: string, data: []): Promise<boolean> => {
+    if (!metadata?.address) return false
+    const result = await tokenAddress.typedContract
+      ?.withAddress(`${metadata?.address}`)
+      .query.transfer(to as AccountId, value, data)
+    return result?.value.ok ? true : false
+  }
+
+  const handleTransferFrom = async (
+    from: string,
+    to: string,
+    value: string,
+    data: [],
+  ): Promise<boolean> => {
+    if (!metadata?.address) return false
+    const result = await tokenAddress.typedContract
+      ?.withAddress(`${metadata?.address}`)
+      .query.transferFrom(from as AccountId, to as AccountId, value, data)
+    return result?.value.ok ? true : false
+  }
+
+  const handleApproval = async (spender: string, value: string): Promise<boolean> => {
+    if (!metadata?.address) return false
+    const result = await tokenAddress.typedContract
+      ?.withAddress(`${metadata?.address}`)
+      .query.approve(spender as AccountId, value)
+    return result?.value.ok ? true : false
   }
 
   return (
@@ -135,23 +186,26 @@ export const Explorer = () => {
             </p>
             <small></small>
             {currentFunction === 'transfer' ? (
-              <ExplorerFunctions spender value />
+              <ExplorerFunctions spender value handleTransfer={handleTransfer} />
             ) : currentFunction === 'approval' ? (
-              <ExplorerFunctions owner spender value />
+              <ExplorerFunctions owner spender value handleApproval={handleApproval} />
             ) : currentFunction === 'transferFrom' ? (
-              <ExplorerFunctions from to value />
+              <ExplorerFunctions from to value handleTransferFrom={handleTransferFrom} />
             ) : currentFunction === 'allowance' ? (
-              <ExplorerFunctions owner spender />
+              <ExplorerFunctions owner spender handleAllowance={handleAllowance} />
             ) : currentFunction === 'balanceOf' ? (
-              <ExplorerFunctions who />
+              <ExplorerFunctions who handleBalanceOf={handleBalanceOf} />
             ) : currentFunction === 'totalSupply' ? (
-              <ExplorerFunctions view={'totalSupply'} viewValue={'10000000'} />
+              <ExplorerFunctions view={'totalSupply'} viewValue={metadata?.supply?.toString()} />
             ) : currentFunction === 'decimals' ? (
-              <ExplorerFunctions view={'decimals'} viewValue={'16'} />
+              <ExplorerFunctions
+                view={'decimals'}
+                viewValue={Number(metadata?.decimal).toString()}
+              />
             ) : currentFunction === 'name' ? (
-              <ExplorerFunctions view={'name'} viewValue={'JeffToken'} />
+              <ExplorerFunctions view={'name'} viewValue={metadata?.name} />
             ) : currentFunction === 'symbol' ? (
-              <ExplorerFunctions view={'symbol'} viewValue={'JTK'} />
+              <ExplorerFunctions view={'symbol'} viewValue={metadata?.symbol} />
             ) : (
               ''
             )}

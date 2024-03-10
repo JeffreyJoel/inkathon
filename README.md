@@ -47,6 +47,6 @@ As we move on from the hackathon we plan to add more functionalities like:
 ## Acknowledgments
 
 - Encode x Polkadot Hackathon for the opportunity.
-- [Jeffery Owoloko](https://github.com/JeffreyJoel) for being an awesome hack mate.
+- [Jeffrey Owoloko](https://github.com/JeffreyJoel) for being an awesome hack mate.
 
 Hacked By Team HIOSC
