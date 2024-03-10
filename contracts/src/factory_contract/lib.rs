@@ -51,11 +51,18 @@ pub mod factory_contract {
             code_hash: Hash,
         ) {
             let from = self.env().caller();
-            let new_token = TokenRef::new(supply, name, symbol, decimal, description)
-                .code_hash(code_hash)
-                .endowment(0)
-                .salt_bytes(&[0xDE, 0xAD, 0xBE, 0xEF])
-                .instantiate();
+            let new_token = TokenRef::new(
+                supply,
+                name,
+                symbol,
+                decimal,
+                description,
+                self.env().caller(),
+            )
+            .code_hash(code_hash)
+            .endowment(0)
+            .salt_bytes(&[0xDE, 0xAD, 0xBE, 0xEF])
+            .instantiate();
             let token_address = new_token.to_account_id();
             self.token_id.insert(&self.token_count, &token_address);
             let owner_tokens = self.owner_tokenid.get(from);

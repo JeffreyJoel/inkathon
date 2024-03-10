@@ -28,6 +28,7 @@ export default class Constructors {
 	* @param { string | null } symbol,
 	* @param { (number | string | BN) } decimals,
 	* @param { string | null } description,
+	* @param { ArgumentTypes.AccountId } owner,
 	*/
    	async "new" (
 		supply: (string | number | BN),
@@ -35,6 +36,7 @@ export default class Constructors {
 		symbol: string | null,
 		decimals: (number | string | BN),
 		description: string | null,
+		owner: ArgumentTypes.AccountId,
 		__options ? : ConstructorOptions,
    	) {
    		const __contract = JSON.parse(ContractFile);
@@ -42,7 +44,7 @@ export default class Constructors {
 		const gasLimit = (await _genValidGasLimitAndValue(this.nativeAPI, __options)).gasLimit as WeightV2;
 
 		const storageDepositLimit = __options?.storageDepositLimit;
-			const tx = code.tx["new"]!({ gasLimit, storageDepositLimit, value: __options?.value }, supply, name, symbol, decimals, description);
+			const tx = code.tx["new"]!({ gasLimit, storageDepositLimit, value: __options?.value }, supply, name, symbol, decimals, description, owner);
 			let response;
 
 			try {

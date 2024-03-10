@@ -1,6 +1,6 @@
 {
   "source": {
-    "hash": "0xc82c1f3b1f4e408a2debb2f1514a985406c05695b7b437946eb2b609b695189d",
+    "hash": "0x18ff9a13714db1f3541a907ff9fbe69e2524bb9e3b03c26db8456cfe2d835157",
     "language": "ink! 4.3.0",
     "compiler": "rustc 1.76.0",
     "build_info": {
@@ -67,6 +67,15 @@
                 "Option"
               ],
               "type": 5
+            }
+          },
+          {
+            "label": "owner",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 3
             }
           }
         ],
