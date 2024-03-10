@@ -26,6 +26,7 @@ export default class Methods {
 	 * @param { (string | number | BN) } supply,
 	 * @param { string | null } name,
 	 * @param { string | null } symbol,
+	 * @param { string | null } description,
 	 * @param { (number | string | BN) } decimal,
 	 * @param { ArgumentTypes.Hash } codeHash,
 	*/
@@ -33,11 +34,12 @@ export default class Methods {
 		supply: (string | number | BN),
 		name: string | null,
 		symbol: string | null,
+		description: string | null,
 		decimal: (number | string | BN),
 		codeHash: ArgumentTypes.Hash,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "createToken", [supply, name, symbol, decimal, codeHash], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "createToken", [supply, name, symbol, description, decimal, codeHash], __options);
 	}
 
 	/**

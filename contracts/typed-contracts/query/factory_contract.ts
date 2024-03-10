@@ -35,6 +35,7 @@ export default class Methods {
 	* @param { (string | number | BN) } supply,
 	* @param { string | null } name,
 	* @param { string | null } symbol,
+	* @param { string | null } description,
 	* @param { (number | string | BN) } decimal,
 	* @param { ArgumentTypes.Hash } codeHash,
 	* @returns { Result<null, ReturnTypes.LangError> }
@@ -43,11 +44,12 @@ export default class Methods {
 		supply: (string | number | BN),
 		name: string | null,
 		symbol: string | null,
+		description: string | null,
 		decimal: (number | string | BN),
 		codeHash: ArgumentTypes.Hash,
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<null, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "createToken", [supply, name, symbol, decimal, codeHash], __options , (result) => { return handleReturnType(result, getTypeDescription(5, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "createToken", [supply, name, symbol, description, decimal, codeHash], __options , (result) => { return handleReturnType(result, getTypeDescription(5, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**

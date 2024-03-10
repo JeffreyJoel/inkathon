@@ -1,6 +1,6 @@
 {
   "source": {
-    "hash": "0x82899da0442bb3af5ef16bf8444330304e1be8d2cd9b372e1753be5ab987e336",
+    "hash": "0xd0772dd6d30d6339331ebe0ae3824110d9bf6f7786a1bbd9c74c0a0395c1a569",
     "language": "ink! 4.3.0",
     "compiler": "rustc 1.76.0",
     "build_info": {
@@ -140,6 +140,15 @@
           },
           {
             "label": "symbol",
+            "type": {
+              "displayName": [
+                "Option"
+              ],
+              "type": 8
+            }
+          },
+          {
+            "label": "description",
             "type": {
               "displayName": [
                 "Option"
