@@ -1,4 +1,4 @@
-import { CreateToken } from './TokenSelction'
+import { CreateToken } from './CreateToken'
 import { TokenTable } from './TokenTable'
 
 export function TokenOverview() {

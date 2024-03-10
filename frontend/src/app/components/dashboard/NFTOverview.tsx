@@ -1,4 +1,4 @@
-import { CreateNFT } from './NFTSelection'
+import { CreateNFT } from './CreateNFT'
 import { NftTable } from './NftTable'
 
 export function NFTOverview() {
