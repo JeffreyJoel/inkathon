@@ -27,6 +27,7 @@ mod my_psp {
             symbol: Option<String>,
             decimals: u8,
             description: Option<String>,
+            owner: AccountId,
         ) -> Self {
             let (data, events) = PSP22Data::new(supply, Self::env().caller()); // (2)
             let contract = Self {
@@ -35,7 +36,7 @@ mod my_psp {
                 symbol,
                 decimals,
                 description,
-                owner: Self::env().caller(),
+                owner,
             };
             contract.emit_events(events);
             contract
