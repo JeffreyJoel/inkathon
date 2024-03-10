@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 
 import { ContractIds } from '@/deployments/deployments'
 import FactoryContract from '@inkathon/contracts/typed-contracts/contracts/factory_contract'
+import TokenContract from '@inkathon/contracts/typed-contracts/contracts/my_psp'
 import { AccountId } from '@inkathon/contracts/typed-contracts/types-arguments/factory_contract'
 import {
   contractQuery,
@@ -20,6 +21,9 @@ export function TokenTable() {
   const { contract, address: contractAddress } = useRegisteredContract(ContractIds.Factory)
   const { typedContract } = useRegisteredTypedContract(ContractIds.Factory, FactoryContract)
   const [tokenIds, setTokenIds] = useState<any>()
+  const tokenAddress = useRegisteredTypedContract(ContractIds.Psp22, TokenContract)
+  const token = useRegisteredContract(ContractIds.Psp22)
+  const [tokenMetadata, setTokenMetadata] = useState<any[]>([])
 
   const fetchOwnerTokenIds = async () => {
     if (!contract || !typedContract || !api) return
@@ -44,9 +48,6 @@ export function TokenTable() {
     } catch (e) {
       console.error(e)
       toast.error('Error while fetching token ids. Try again…')
-    } finally {
-      // fetchTokenById()
-      // setFetchIsLoading(false)
     }
   }
 
@@ -65,24 +66,56 @@ export function TokenTable() {
     } catch (e) {
       console.error(e)
       toast.error('Error while fetchingTokenById. Try again…')
-    } finally {
-      // setFetchIsLoading(false)
     }
   }
 
   const getAllContractDetails = async (tokenIdArray: any): Promise<AccountId[]> => {
     const accountIds: AccountId[] = []
-    for (let index = 0; index < tokenIdArray.length; index++) {
+    for (let index = 0; index < tokenIdArray?.length; index++) {
       const accountId = (await fetchTokenById(tokenIdArray[index])) as AccountId
       accountIds.push(accountId)
     }
     return accountIds
   }
 
+  const getContractMetadata = async () => {
+    const addresses = await getAllContractDetails([0, 1])
+    console.log(addresses)
+    const metadatas = []
+    for (const address of addresses) {
+      console.log(address)
+      console.log(token.contract)
+      if (!token.contract || !api) return
+      const resultName = await tokenAddress.typedContract
+        ?.withAddress(`${address}`)
+        .query.tokenName()
+      const resultSymbol = await tokenAddress.typedContract
+        ?.withAddress(`${address}`)
+        .query.tokenSymbol()
+      const resultDecimal = await tokenAddress.typedContract
+        ?.withAddress(`${address}`)
+        .query.tokenDecimals()
+      const resultSupply = await tokenAddress.typedContract
+        ?.withAddress(`${address}`)
+        .query.totalSupply()
+      console.log(resultName, resultSymbol, resultSupply, resultDecimal)
+      metadatas.push({
+        name: resultName?.value.ok,
+        symbol: resultSymbol?.value.ok,
+        address,
+        totalSupply: resultSupply?.value.ok,
+      })
+    }
+    setTokenMetadata(metadatas)
+  }
+
   useEffect(() => {
-    fetchOwnerTokenIds()
-    console.log(tokenIds)
-  }, [typedContract])
+    if (contract && typedContract && api) {
+      fetchOwnerTokenIds()
+      console.log(tokenIds)
+      getContractMetadata()
+    }
+  }, [typedContract, contract, typedContract, api])
 
   const router = useRouter()
   return (
@@ -100,25 +133,33 @@ export function TokenTable() {
               Address
             </th>
             <th scope="col" className="px-6 py-3">
-              Price
+              Total Supply
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-            <th
-              scope="row"
-              className="cursor-pointer whitespace-nowrap px-6 py-4 font-medium text-blue-600 "
-              onClick={() => {
-                router.push(`/dashboard/contracts/${1}`)
-              }}
-            >
-              JeffToken
-            </th>
-            <td className="px-6 py-4">JTK</td>
-            <td className="px-6 py-4">1FRMM...hV24fg</td>
-            <td className="px-6 py-4">$2999</td>
-          </tr>
+          {tokenMetadata?.map((data, index) => (
+            <tr key={index} className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+              <th
+                scope="row"
+                className="cursor-pointer whitespace-nowrap px-6 py-4 font-medium text-blue-600 "
+                onClick={() => {
+                  router.push(`/dashboard/contracts/${1}`)
+                }}
+              >
+                {data?.name}
+              </th>
+              <td className="px-6 py-4">{data?.symbol}</td>
+              <td className="px-6 py-4">
+                {String(data?.address).substring(0, 8)}...
+                {String(data?.address).substring(
+                  String(data?.address).length - 9,
+                  String(data?.address).length - 1,
+                )}
+              </td>
+              <td className="px-6 py-4">{data?.totalSupply.toString()}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
