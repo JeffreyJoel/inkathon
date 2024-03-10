@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { ContractIds } from '@/deployments/deployments'
@@ -248,6 +249,7 @@ export function CreateToken() {
   const { contract, address: contractAddress } = useRegisteredContract(ContractIds.Factory)
   const { typedContract } = useRegisteredTypedContract(ContractIds.Factory, FactoryContract)
   const [tokenIds, setTokenIds] = useState<any>()
+  const router = useRouter()
 
   const [inputValues, setInputValues] = useState({
     name: '',
@@ -347,7 +349,7 @@ export function CreateToken() {
 
       console.log(tokenCreate.result)
       console.log(contractAddress)
-
+      router.push(`/dashboard/contracts/5Dha2roPXs7Wi5oBv5QoKhfeE2A7Ctju5vGW3JMLcj8LaFoe`)
       // reset()
       // console.log(supply, name, symbol, decimal)
     } catch (e) {
@@ -427,7 +429,7 @@ export function CreateToken() {
 
           <div className="mb-5 items-center gap-4">
             <Label htmlFor="symbol" className="text-right">
-              decimal
+              Decimal
             </Label>
             <Input
               id="decimal"
