@@ -85,7 +85,7 @@ export function TokenTable() {
     for (const address of addresses) {
       console.log(address)
       console.log(token.contract)
-      if (!token.contract || !api) return
+      if (!api) return
       const resultName = await tokenAddress.typedContract
         ?.withAddress(`${address}`)
         .query.tokenName()
@@ -107,6 +107,7 @@ export function TokenTable() {
       })
     }
     setTokenMetadata(metadatas)
+    console.log(metadatas)
   }
 
   useEffect(() => {
@@ -157,7 +158,7 @@ export function TokenTable() {
                   String(data?.address).length - 1,
                 )}
               </td>
-              <td className="px-6 py-4">{data?.totalSupply.toString()}</td>
+              <td className="px-6 py-4">{data?.totalSupply?.toString()}</td>
             </tr>
           ))}
         </tbody>
