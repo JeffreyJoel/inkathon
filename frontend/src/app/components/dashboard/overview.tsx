@@ -9,7 +9,6 @@ import { Spinner } from '@/components/ui/spinner'
 
 import { NFTSelection } from './CreateNFT'
 import { TokenSelection } from './CreateToken'
-import { NFTOverview } from './NFTOverview'
 import { TokenOverview } from './TokenOverview'
 
 export function OverviewComponent() {
@@ -34,7 +33,7 @@ export function OverviewComponent() {
         </div>
       ) : (
         <>
-          {!contractCreated ? (
+          {contractCreated ? (
             <div>
               <h2 className="text-center text-2xl font-bold lg:text-3xl">
                 You have not created any projects
@@ -70,13 +69,13 @@ export function OverviewComponent() {
                   <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">
                     NFTs Deployed
                   </h5>
-                  <p className="text-lg font-normal text-gray-100">1</p>
+                  <p className="text-lg font-normal text-gray-100">0</p>
                 </div>
               </div>
 
               <TokenOverview tableData={tokenMetadata} isLoading={isLoading} />
 
-              <NFTOverview />
+              {/* <NFTOverview /> */}
             </div>
           )}
         </>

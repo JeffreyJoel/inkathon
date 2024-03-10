@@ -141,6 +141,8 @@ const SingleContract = ({ params }: { params: { id: string } }) => {
                 symbol={tokenMedata?.symbol}
                 decimal={Number(tokenMedata?.decimal)}
                 userBalance={Number(tokenMedata?.userBalance)}
+                name={tokenMedata?.name}
+                address={tokenMedata?.address}
               />
             ) : (
               ''

@@ -3,13 +3,16 @@ export function ContractOverview({
   supply,
   decimal,
   userBalance,
+  name,
+  address,
 }: {
   symbol: string
   supply: string
   decimal: number
   userBalance: number
+  name: string
+  address: string
 }) {
-
   return (
     <div className="mt-4">
       {/* <div className="mb-10 border-b border-gray-700 pb-6">
@@ -34,7 +37,7 @@ export function ContractOverview({
           <h5 className="mb-2 text-xl font-normal tracking-tight text-gray-900 dark:text-white">
             Total Supply
           </h5>
-        
+
           <p className="text-xl font-normal text-gray-100">
             {supply} {symbol}
           </p>
@@ -42,12 +45,12 @@ export function ContractOverview({
         <div className="mr-8 block w-full max-w-sm cursor-pointer rounded-lg border border-gray-600 p-5 shadow">
           <h5 className="mb-2 text-xl font-normal tracking-tight text-white">Owned by you</h5>
           <p className="text-xl font-normal text-gray-100">
-            {userBalance} {symbol}
+            {supply} {symbol}
           </p>
         </div>
         <div className="mr-8 block w-full max-w-sm cursor-pointer rounded-lg border border-gray-600 p-5 shadow">
           <h5 className="mb-2 text-xl font-normal tracking-tight text-white">Decimals</h5>
-          <p className="text-xl font-normal text-gray-100">{decimal}</p>
+          <p className="text-xl font-normal text-gray-100">{decimal || 16}</p>
         </div>
       </div>
       {/* Events */}
@@ -73,21 +76,18 @@ export function ContractOverview({
                 <th scope="col" className="px-6 py-3">
                   Events
                 </th>
-                <th scope="col" className="px-6 py-3">
-                  Block Number
-                </th>
+                {/* // <th scope="col" className="px-6 py-3">
+                //   Block Number
+                // </th> */}
               </tr>
             </thead>
             <tbody>
               <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-                <th scope="row" className="cursor-pointer whitespace-nowrap px-6 py-4 font-medium">
-                  JeffToken
-                </th>
-                <td scope="row" className="px-6 py-4">
-                  Mint
-                </td>
-                <td scope="row" className="px-6 py-4">
+                <td scope="" className="cursor-pointer whitespace-nowrap px-6 py-4 font-medium">
                   1FRMM...hV24fg
+                </td>
+                <td scope="" className="px-6 py-4">
+                  Mint
                 </td>
               </tr>
             </tbody>
@@ -113,7 +113,7 @@ export function ContractOverview({
             <tbody>
               <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
                 <td scope="col" className="cursor-pointer whitespace-nowrap px-6 py-4 font-medium">
-                  0xe2ac869...02254E
+                  5C9xKEs...yyycaN
                 </td>
                 <td scope="col" className="px-6 py-4">
                   <div className="flex">
