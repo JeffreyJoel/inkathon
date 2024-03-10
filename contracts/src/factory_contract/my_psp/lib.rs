@@ -29,7 +29,7 @@ mod my_psp {
             description: Option<String>,
             owner: AccountId,
         ) -> Self {
-            let (data, events) = PSP22Data::new(supply, Self::env().caller()); // (2)
+            let (data, events) = PSP22Data::new(supply, owner);
             let contract = Self {
                 data,
                 name,
