@@ -46,11 +46,12 @@ pub mod factory_contract {
             supply: u128,
             name: Option<String>,
             symbol: Option<String>,
+            description: Option<String>,
             decimal: u8,
             code_hash: Hash,
         ) {
             let from = self.env().caller();
-            let new_token = TokenRef::new(supply, name, symbol, decimal)
+            let new_token = TokenRef::new(supply, name, symbol, decimal, description)
                 .code_hash(code_hash)
                 .endowment(0)
                 .salt_bytes(&[0xDE, 0xAD, 0xBE, 0xEF])

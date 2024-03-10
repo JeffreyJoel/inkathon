@@ -18,16 +18,16 @@ mod my_nft {
 
     #[ink(storage)]
     pub struct MyNft {
-        data: PSP34Data,          // (1)
-        metadata: metadata::Data, // (8)
+        data: PSP34Data,
+        metadata: metadata::Data,
     }
 
     impl MyNft {
         #[ink(constructor)]
         pub fn new() -> Self {
             Self {
-                data: PSP34Data::new(),              // (2)
-                metadata: metadata::Data::default(), // (8)
+                data: PSP34Data::new(),
+                metadata: metadata::Data::default(),
             }
         }
 

@@ -1,4 +1,4 @@
 [workspace]
-
+exclude = ["src/my_psp"]
 resolver = "1"
 members = ["src/factory_contract"]
