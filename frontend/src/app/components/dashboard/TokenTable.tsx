@@ -145,7 +145,7 @@ export function TokenTable() {
                 scope="row"
                 className="cursor-pointer whitespace-nowrap px-6 py-4 font-medium text-blue-600 "
                 onClick={() => {
-                  router.push(`/dashboard/contracts/${1}`)
+                  router.push(`/dashboard/contracts/${data?.address}`)
                 }}
               >
                 {data?.name}

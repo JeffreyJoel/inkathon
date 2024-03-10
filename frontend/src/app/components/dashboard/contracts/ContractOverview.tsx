@@ -1,4 +1,70 @@
+import { useParams, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+
+import { ContractIds } from '@/deployments/deployments'
+import TokenContract from '@inkathon/contracts/typed-contracts/contracts/my_psp'
+import {
+  useInkathon,
+  useRegisteredContract,
+  useRegisteredTypedContract,
+} from '@scio-labs/use-inkathon'
+
 export function ContractOverview() {
+  const router = useRouter()
+  const params = useParams()
+  const { api, activeAccount, activeSigner } = useInkathon()
+  const { contract, address: contractAddress } = useRegisteredContract(ContractIds.Factory)
+  // const { typedContract } = useRegisteredTypedContract(ContractIds.Factory, FactoryContract)
+  // const [tokenIds, setTokenIds] = useState<any>()
+  const tokenAddress = useRegisteredTypedContract(ContractIds.Psp22, TokenContract)
+  const token = useRegisteredContract(ContractIds.Psp22)
+
+  const [tokenIds, setTokenIds] = useState<any>()
+
+  console.log(params.id)
+
+  const getContractMetadata = async (address: any) => {
+    console.log(token.contract)
+    if (!api) return
+    // Assuming tokenAddress.typedContract is available and correctly initialized
+    const resultName = await tokenAddress.typedContract
+      ?.withAddress('5Dha2roPXs7Wi5oBv5QoKhfeE2A7Ctju5vGW3JMLcj8LaFoe')
+      .query.tokenName()
+    //   .query.tokenName()
+    // const resultSymbol = await tokenAddress.typedContract
+    //   ?.withAddress(`${address}`)
+    //   .query.tokenSymbol()
+    // const resultDecimal = await tokenAddress.typedContract
+    //   ?.withAddress(`${address}`)
+    //   .query.tokenDecimals()
+    // const resultSupply = await tokenAddress.typedContract
+    //   ?.withAddress(`${address}`)
+    //   .query.totalSupply()
+
+    console.log(
+      resultName,
+      // resultSymbol, resultSupply, resultDecimal
+    )
+
+    // const metadata = {
+    //   name: resultName?.value.ok,
+    //   symbol: resultSymbol?.value.ok,
+    //   address,
+    //   totalSupply: resultSupply?.value.ok,
+    // }
+
+    // setTokenMetadata([metadata]) // Assuming setTokenMetadata is a state setter function
+    // console.log(metadata)
+  }
+  useEffect(() => {
+    // if (params.id && api) {
+    getContractMetadata('5Dha2roPXs7Wi5oBv5QoKhfeE2A7Ctju5vGW3JMLcj8LaFoe')
+    // console.log(tokenMetadata)
+
+    // console.log(tokenIds)
+    // getContractMetadata()
+    // }
+  }, [api, params.id])
   return (
     <div className="mt-4">
       {/* <div className="mb-10 border-b border-gray-700 pb-6">
@@ -23,7 +89,7 @@ export function ContractOverview() {
           <h5 className="mb-2 text-xl font-normal tracking-tight text-gray-900 dark:text-white">
             Total Supply
           </h5>
-          <p className="text-xl font-normal text-gray-100">0.0 PKT</p>
+          <p className="text-xl font-normal text-gray-100">PKT</p>
         </div>
         <div className="mr-8 block w-full max-w-sm cursor-pointer rounded-lg border border-gray-600 p-5 shadow">
           <h5 className="mb-2 text-xl font-normal tracking-tight text-white">Owned by you</h5>
