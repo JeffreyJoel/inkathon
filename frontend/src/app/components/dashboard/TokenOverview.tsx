@@ -1,7 +1,9 @@
 import { CreateToken } from './CreateToken'
 import { TokenTable } from './TokenTable'
 
-export function TokenOverview() {
+export function TokenOverview({ tableData, isLoading }: { tableData: any[]; isLoading: boolean }) {
+  console.log(tableData)
+
   return (
     <div className="mt-20">
       <div className="mb-5 flex items-center justify-between">
@@ -17,7 +19,7 @@ export function TokenOverview() {
 
         <CreateToken />
       </div>
-      <TokenTable />
+      <TokenTable tableData={tableData} isLoading={isLoading} />
     </div>
   )
 }

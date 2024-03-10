@@ -9,6 +9,7 @@ export function ContractOverview({
   decimal: number
   userBalance: number
 }) {
+
   return (
     <div className="mt-4">
       {/* <div className="mb-10 border-b border-gray-700 pb-6">
@@ -33,6 +34,7 @@ export function ContractOverview({
           <h5 className="mb-2 text-xl font-normal tracking-tight text-gray-900 dark:text-white">
             Total Supply
           </h5>
+        
           <p className="text-xl font-normal text-gray-100">
             {supply} {symbol}
           </p>
