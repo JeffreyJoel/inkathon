@@ -52,12 +52,12 @@ export const Explorer = () => {
               transfer
             </p>
             <p
-              className={`mb-2 cursor-pointer font-mono font-semibold ${currentFunction === 'approve' ? 'text-gray-200' : ''}`}
+              className={`mb-2 cursor-pointer font-mono font-semibold ${currentFunction === 'approval' ? 'text-gray-200' : ''}`}
               onClick={(e) => {
-                handleSetCurrentFunction('approve')
+                handleSetCurrentFunction('approval')
               }}
             >
-              approve
+              approval
             </p>
             <p
               className={`mb-2 cursor-pointer font-mono font-semibold ${currentFunction === 'transferFrom' ? 'text-gray-200' : ''}`}
@@ -136,8 +136,8 @@ export const Explorer = () => {
             <small></small>
             {currentFunction === 'transfer' ? (
               <ExplorerFunctions spender value />
-            ) : currentFunction === 'approve' ? (
-              <ExplorerFunctions to value />
+            ) : currentFunction === 'approval' ? (
+              <ExplorerFunctions owner spender value />
             ) : currentFunction === 'transferFrom' ? (
               <ExplorerFunctions from to value />
             ) : currentFunction === 'allowance' ? (

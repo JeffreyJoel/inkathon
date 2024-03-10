@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import { HiOutlineDuplicate } from 'react-icons/hi'
 
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
@@ -111,6 +112,15 @@ export const ExplorerFunctions = ({
         ) : (
           ''
         )}
+
+        <Button
+          // type="submit"
+          onClick={() => {
+            // createToken(inputValues)
+          }}
+        >
+          Run
+        </Button>
       </div>
     </>
   )
