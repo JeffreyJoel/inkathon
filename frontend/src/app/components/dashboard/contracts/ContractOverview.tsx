@@ -1,4 +1,14 @@
-export function ContractOverview() {
+export function ContractOverview({
+  symbol,
+  supply,
+  decimal,
+  userBalance,
+}: {
+  symbol: string
+  supply: string
+  decimal: number
+  userBalance: number
+}) {
   return (
     <div className="mt-4">
       {/* <div className="mb-10 border-b border-gray-700 pb-6">
@@ -23,15 +33,19 @@ export function ContractOverview() {
           <h5 className="mb-2 text-xl font-normal tracking-tight text-gray-900 dark:text-white">
             Total Supply
           </h5>
-          <p className="text-xl font-normal text-gray-100">0.0 PKT</p>
+          <p className="text-xl font-normal text-gray-100">
+            {supply} {symbol}
+          </p>
         </div>
         <div className="mr-8 block w-full max-w-sm cursor-pointer rounded-lg border border-gray-600 p-5 shadow">
           <h5 className="mb-2 text-xl font-normal tracking-tight text-white">Owned by you</h5>
-          <p className="text-xl font-normal text-gray-100">0.0 PKT</p>
+          <p className="text-xl font-normal text-gray-100">
+            {userBalance} {symbol}
+          </p>
         </div>
         <div className="mr-8 block w-full max-w-sm cursor-pointer rounded-lg border border-gray-600 p-5 shadow">
           <h5 className="mb-2 text-xl font-normal tracking-tight text-white">Decimals</h5>
-          <p className="text-xl font-normal text-gray-100">16</p>
+          <p className="text-xl font-normal text-gray-100">{decimal}</p>
         </div>
       </div>
       {/* Events */}
@@ -102,7 +116,7 @@ export function ContractOverview() {
                 <td scope="col" className="px-6 py-4">
                   <div className="flex">
                     <div className="mr-2 w-fit rounded border border-gray-500 px-2 py-1 font-sans text-xs font-semibold  text-gray-400 no-underline focus:outline-none">
-                      Member
+                      Minter
                     </div>
 
                     <div className="mr-2 w-fit rounded border border-gray-500 px-2 py-1 font-sans text-xs font-semibold  text-gray-400 no-underline focus:outline-none">

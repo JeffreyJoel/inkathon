@@ -1,6 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+import { ContractIds } from '@/deployments/deployments'
+import TokenContract from '@inkathon/contracts/typed-contracts/contracts/my_psp'
+import { AccountId } from '@inkathon/contracts/typed-contracts/types-arguments/factory_contract'
+import { useInkathon, useRegisteredTypedContract } from '@scio-labs/use-inkathon'
 
 import ContractDetails from '@/app/components/dashboard/contracts/ContractInfo'
 import { ContractOverview } from '@/app/components/dashboard/contracts/ContractOverview'
@@ -9,8 +14,54 @@ import { NavBar } from '@/app/components/nav-bar'
 
 // import tableDataTopCreators from 'variables/nfts/marketplace/tableDataTopCreators';
 
-const SingleContract = () => {
+const SingleContract = ({ params }: { params: { id: string } }) => {
   const [tab, setTab] = useState(0)
+  const { api, activeAccount, activeSigner } = useInkathon()
+  const tokenAddress = useRegisteredTypedContract(ContractIds.Psp22, TokenContract)
+  const [tokenMedata, setTokenMetadata] = useState<any>({})
+
+  useEffect(() => {
+    console.log(params)
+    const getContractMetadata = async (address: string) => {
+      if (api && tokenAddress.typedContract) {
+        console.log(address)
+        if (!api) return
+        const resultName = await tokenAddress.typedContract
+          ?.withAddress(`${address}`)
+          .query.tokenName()
+        const resultSymbol = await tokenAddress.typedContract
+          ?.withAddress(`${address}`)
+          .query.tokenSymbol()
+        const resultDecimal = await tokenAddress.typedContract
+          ?.withAddress(`${address}`)
+          .query.tokenDecimals()
+        const resultSupply = await tokenAddress.typedContract
+          ?.withAddress(`${address}`)
+          .query.totalSupply()
+        const resultUserBalance = await tokenAddress.typedContract
+          ?.withAddress(`${address}`)
+          .query.balanceOf(activeAccount?.address as AccountId)
+        console.log(resultName, resultSymbol, resultSupply, resultDecimal, resultUserBalance)
+        setTokenMetadata({
+          name: resultName?.value.ok,
+          symbol: resultSymbol?.value.ok,
+          supply: resultSupply?.value.ok,
+          decimal: resultDecimal?.value.ok,
+          address,
+          userBalance: resultUserBalance?.value.ok,
+        })
+        console.log({
+          name: resultName?.value.ok,
+          symbol: resultSymbol?.value.ok,
+          supply: resultSupply?.value.ok,
+          decimal: resultDecimal?.value.ok,
+          address: address,
+          bal: resultUserBalance?.value.ok,
+        })
+      }
+    }
+    getContractMetadata(params.id)
+  }, [api, tokenAddress.typedContract])
 
   return (
     <>
@@ -76,11 +127,24 @@ const SingleContract = () => {
             </div>
           </div>
         </nav>
-        <ContractDetails />
+        <ContractDetails
+          name={tokenMedata?.name}
+          description={tokenMedata?.description}
+          address={tokenMedata?.address}
+        />
 
         <div className="p-4 sm:container sm:mx-auto">
           <div>
-            {tab == 0 ? <ContractOverview /> : ''}
+            {tab == 0 ? (
+              <ContractOverview
+                supply={tokenMedata?.supply?.toString()}
+                symbol={tokenMedata?.symbol}
+                decimal={Number(tokenMedata?.decimal)}
+                userBalance={Number(tokenMedata?.userBalance)}
+              />
+            ) : (
+              ''
+            )}
             {tab == 1 ? (
               <div className="mt-2">
                 <div className="flex justify-between">

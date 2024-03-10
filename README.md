@@ -2,7 +2,7 @@
 
 ## Overview
 
-BADGER is an innovative application built for the Encode x Polkadot 24Q1 Hackathon. It leverages the power of Substrate blockchain technology to enable users to create both Fungible Tokens (FTs) and Non-Fungible Tokens (NFTs) smart contract with ease.
+BADGER is an innovative no-code application built for the Encode x Polkadot 24Q1 Hackathon. It leverages the power of Polkadot blockchain technology to enable users to create both Fungible Tokens (FTs) and Non-Fungible Tokens (NFTs) smart contract with ease.
 
 ## Features
 
