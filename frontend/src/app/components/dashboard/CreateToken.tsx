@@ -147,7 +147,7 @@ export function TokenSelection() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="mr-8 block max-w-sm cursor-pointer rounded-lg border border-gray-600 bg-gradient-to-l from-gray-900 p-6 shadow  hover:from-slate-950 hover:to-slate-950">
+        <div className="mb-8 mr-8 block max-w-sm cursor-pointer rounded-lg border border-gray-600 bg-gradient-to-l from-gray-900 p-6 shadow  hover:from-slate-950 hover:to-slate-950">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Token
           </h5>
