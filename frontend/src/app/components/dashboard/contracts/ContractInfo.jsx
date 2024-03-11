@@ -1,6 +1,18 @@
+import toast from 'react-hot-toast'
 import { HiOutlineDuplicate } from 'react-icons/hi'
 
 export default function ContractDetails({ name, description, address }) {
+  const copyToClipboard = async () => {
+    try {
+      // const textToCopy = document.getElementById('textToCopy').innerText
+      await navigator.clipboard.writeText(String(address))
+      console.log('Address copied to clipboard')
+      toast.success('Address copied ')
+    } catch (err) {
+      toast.error('Failed to copy address: ', err)
+    }
+  }
+
   return (
     <div className="mt-20 p-4 sm:container">
       <div className="mb-6 border-b border-gray-700 pb-6">
@@ -12,7 +24,7 @@ export default function ContractDetails({ name, description, address }) {
         </div>
         <p className="mb-3 text-gray-300">{description}</p>
         <div className="mr-2 w-fit cursor-pointer rounded border px-2 py-1 font-sans text-xs  font-semibold text-white no-underline focus:outline-none">
-          <span className="flex items-center gap-1 text-xs">
+          <span className="flex items-center gap-1 text-xs" onClick={copyToClipboard}>
             <HiOutlineDuplicate /> {String(address).substring(0, 8)}...
             {String(address).substring(String(address).length - 9, String(address).length - 1)}
           </span>

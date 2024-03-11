@@ -32,7 +32,7 @@ export function OverviewComponent() {
         </div>
       ) : (
         <>
-          {contractCreated ? (
+          {!contractCreated ? (
             <div>
               <h2 className="text-center text-2xl font-bold lg:text-3xl">
                 You have not created any projects
