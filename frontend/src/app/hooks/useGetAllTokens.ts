@@ -89,7 +89,7 @@ const useGetAllTokens = () => {
         totalSupply: resultSupply?.value.ok,
       })
     }
-    setTokenMetadata(metadatas)
+    setTokenMetadata(metadatas.reverse())
     console.log(metadatas)
     setIsLoading(false)
   }

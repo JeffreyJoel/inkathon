@@ -239,7 +239,7 @@ export function CreateToken() {
     setInputValues({ ...inputValues, [name]: value })
   }
 
-  const fetchOwnerTokenIds = async () => {
+  const fetchOwnerTokenIds = async (): Promise<any> => {
     if (!contract || !typedContract || !api || !activeAccount?.address) return
 
     try {
@@ -247,22 +247,28 @@ export function CreateToken() {
       console.log('Result from typed contract: ', typedResult)
       setTokenIds(typedResult?.value.ok)
       console.log(tokenIds)
+      return typedResult?.value.ok
     } catch (e) {
       console.error(e)
       toast.error('Error while fetching token ids. Try again…')
     }
   }
 
-  const fetchTokenById = async () => {
+  const fetchTokenById = async (tokenIds: any): Promise<any> => {
     if (!contract || !typedContract || !api || !activeAccount?.address) return
-
     try {
-      const typedResult = await typedContract.query.getTokenById(tokenIds?.length - 1)
-      console.log('Result from fetchTokenById contract: ', typedResult)
+      const typedResult = await typedContract.query.getTokenById(tokenIds[tokenIds.length - 1])
+      console.log('Result from fetchTokenById contract: ', typedResult?.value.ok)
+      return typedResult.value.ok
     } catch (e) {
       console.error(e)
       toast.error('Error while fetchingTokenById. Try again…')
+      return
     }
+  }
+
+  const getAddress = async () => {
+    return await fetchTokenById(await fetchOwnerTokenIds())
   }
 
   useEffect(() => {
@@ -301,6 +307,7 @@ export function CreateToken() {
       console.log(tokenCreate.result)
       console.log(contractAddress)
       toast('Token Created SuccessFully')
+      router.push(`/dashboard/contracts/${await getAddress()}`)
       // reset()
       // console.log(supply, name, symbol, decimal)
     } catch (e) {
