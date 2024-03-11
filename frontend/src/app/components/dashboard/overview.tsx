@@ -11,21 +11,28 @@ import { NFTSelection } from './CreateNFT'
 import { TokenSelection } from './CreateToken'
 import { TokenOverview } from './TokenOverview'
 
-export function OverviewComponent() {
+export function OverviewComponent({ tab }: { tab: number }) {
   const [contractCreated, setContractCreated] = useState(false)
-
   const { tokenMetadata, isLoading } = useGetAllTokens()
+  const [loading, setLoading] = useState(false)
 
   const { api, activeAccount, activeSigner } = useInkathon()
 
   useEffect(() => {
-    setContractCreated(tokenMetadata.length > 0)
-  }, [tokenMetadata])
+    setLoading(true)
+    const timeoutId = setTimeout(() => {
+      setContractCreated(tokenMetadata.length > 0)
+      setLoading(false)
+    }, 6000)
+
+    return () => clearTimeout(timeoutId)
+  }, [tab, tokenMetadata])
+
   return (
     <div className="mt-14 rounded-lg  border-dashed border-gray-200 p-8  dark:border-gray-700">
       {/* <ConnectButton /> */}
 
-      {isLoading || !activeAccount ? (
+      {loading || !activeAccount || !tokenMetadata ? (
         <div className="mt-20 w-full overflow-hidden">
           {' '}
           <Spinner className=" mx-auto h-20 w-20 " />

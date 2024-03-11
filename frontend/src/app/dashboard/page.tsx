@@ -269,7 +269,7 @@ const Marketplace = () => {
 
         <div className="p-4 sm:container sm:mx-auto">
           <div>
-            {tab == 0 ? <OverviewComponent /> : ''}
+            {tab == 0 ? <OverviewComponent tab={tab} /> : ''}
             {tab == 1 ? <TokensComponent /> : ''}
             {tab == 2 ? <NFTsComponent /> : ''}
           </div>
