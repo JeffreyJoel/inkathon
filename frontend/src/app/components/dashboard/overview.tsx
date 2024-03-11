@@ -19,7 +19,6 @@ export function OverviewComponent() {
   const { api, activeAccount, activeSigner } = useInkathon()
 
   useEffect(() => {
-    // Update contractCreated based on the length of tokenMetadata
     setContractCreated(tokenMetadata.length > 0)
   }, [tokenMetadata])
   return (

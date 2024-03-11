@@ -5,8 +5,6 @@ import FactoryContract from '@inkathon/contracts/typed-contracts/contracts/facto
 import TokenContract from '@inkathon/contracts/typed-contracts/contracts/my_psp'
 import { AccountId } from '@inkathon/contracts/typed-contracts/types-arguments/factory_contract'
 import {
-  contractQuery,
-  decodeOutput,
   useInkathon,
   useRegisteredContract,
   useRegisteredTypedContract,
@@ -24,24 +22,14 @@ const useGetAllTokens = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const fetchOwnerTokenIds = async () => {
-    if (!contract || !typedContract || !api) return
+    if (!contract || !typedContract || !api || !activeAccount?.address) return
 
     try {
-      const result = await contractQuery(api, '', contract, 'get_owner_token_ids', {}, [
-        activeAccount?.address,
-      ])
-      const { output, isError, decodedOutput } = decodeOutput(
-        result,
-        contract,
-        'get_owner_token_ids',
-      )
-      if (isError) throw new Error(decodedOutput)
-
       // Alternatively: Fetch it with typed contract instance
-      const typedResult = await typedContract.query.getOwnerTokenIds(activeAccount?.address || '')
+      const typedResult = await typedContract.query.getOwnerTokenIds(activeAccount?.address)
       console.log('Result from typed contract: ', typedResult)
       setTokenIds(typedResult?.value.ok)
-      getAllContractDetails(typedResult?.value.ok)
+      await getContractMetadata(typedResult?.value.ok)
       console.log(tokenIds)
     } catch (e) {
       console.error(e)
@@ -50,20 +38,17 @@ const useGetAllTokens = () => {
   }
 
   const fetchTokenById = async (tokenId: any): Promise<AccountId | undefined | null> => {
-    if (!contract || !typedContract || !api) {
+    if (!typedContract || !api || !activeAccount?.address) {
       return
-    }
-    try {
-      const result = await contractQuery(api, '', contract, 'get_token_by_id', {}, [tokenId])
-      const { output, isError, decodedOutput } = decodeOutput(result, contract, 'get_token_by_id')
-      if (isError) throw new Error(decodedOutput)
-      // Alternatively: Fetch it with typed contract instance
-      const typedResult = await typedContract.query.getTokenById(tokenId)
-      console.log('Result from fetchTokenById contract: ', typedResult)
-      return typedResult.value.ok
-    } catch (e) {
-      console.error(e)
-      toast.error('Error while fetchingTokenById. Try again…')
+    } else {
+      try {
+        const typedResult = await typedContract.query.getTokenById(tokenId)
+        console.log('Result from fetchTokenById contract: ', typedResult)
+        return typedResult.value.ok
+      } catch (e) {
+        console.log(e)
+        toast.error('Error while fetchingTokenById.... Try again…')
+      }
     }
   }
 
@@ -76,8 +61,8 @@ const useGetAllTokens = () => {
     return accountIds
   }
 
-  const getContractMetadata = async () => {
-    const addresses = await getAllContractDetails([0, 1])
+  const getContractMetadata = async (tokenIds: any) => {
+    const addresses = await getAllContractDetails(tokenIds)
     console.log(addresses)
     const metadatas = []
     for (const address of addresses) {
@@ -110,13 +95,13 @@ const useGetAllTokens = () => {
 
   useEffect(() => {
     setIsLoading(true)
-    if (contract && typedContract && api) {
+    if (contract && typedContract && api && activeAccount) {
       fetchOwnerTokenIds()
       console.log(tokenIds)
-      getContractMetadata()
+      // getContractMetadata()
     }
     setIsLoading(false)
-  }, [typedContract, contract, typedContract, api])
+  }, [typedContract, contract, typedContract, api, activeAccount])
 
   //   return tokenMetadata
   return { tokenMetadata, isLoading }

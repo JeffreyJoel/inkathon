@@ -6,8 +6,6 @@ import { useEffect, useState } from 'react'
 import { ContractIds } from '@/deployments/deployments'
 import FactoryContract from '@inkathon/contracts/typed-contracts/contracts/factory_contract'
 import {
-  contractQuery,
-  decodeOutput,
   useInkathon,
   useRegisteredContract,
   useRegisteredTypedContract,
@@ -49,20 +47,9 @@ export function TokenSelection() {
   }
 
   const fetchOwnerTokenIds = async () => {
-    if (!contract || !typedContract || !api) return
+    if (!contract || !typedContract || !api || !activeAccount?.address) return
 
     try {
-      const result = await contractQuery(api, '', contract, 'get_owner_token_ids', {}, [
-        activeAccount?.address,
-      ])
-      const { output, isError, decodedOutput } = decodeOutput(
-        result,
-        contract,
-        'get_owner_token_ids',
-      )
-      if (isError) throw new Error(decodedOutput)
-
-      // Alternatively: Fetch it with typed contract instance
       const typedResult = await typedContract.query.getOwnerTokenIds(activeAccount?.address || '')
       console.log('Result from typed contract: ', typedResult)
       setTokenIds(typedResult?.value.ok)
@@ -71,30 +58,18 @@ export function TokenSelection() {
     } catch (e) {
       console.error(e)
       toast.error('Error while fetching token ids. Try again…')
-    } finally {
-      fetchTokenById()
-      // setFetchIsLoading(false)
     }
   }
 
   const fetchTokenById = async () => {
-    if (!contract || !typedContract || !api) return
+    if (!contract || !typedContract || !api || !activeAccount?.address) return
 
     try {
-      const result = await contractQuery(api, '', contract, 'get_token_by_id', {}, [
-        tokenIds?.length - 1,
-      ])
-      const { output, isError, decodedOutput } = decodeOutput(result, contract, 'get_token_by_id')
-      if (isError) throw new Error(decodedOutput)
-
-      // Alternatively: Fetch it with typed contract instance
       const typedResult = await typedContract.query.getTokenById(tokenIds?.length - 1)
       console.log('Result from fetchTokenById contract: ', typedResult)
     } catch (e) {
       console.error(e)
-      toast.error('Error while fetchingTokenById. Try again…')
-    } finally {
-      // setFetchIsLoading(false)
+      toast.error('Error while fetchingTokenById.... Try again…')
     }
   }
 
@@ -265,52 +240,28 @@ export function CreateToken() {
   }
 
   const fetchOwnerTokenIds = async () => {
-    if (!contract || !typedContract || !api) return
+    if (!contract || !typedContract || !api || !activeAccount?.address) return
 
     try {
-      const result = await contractQuery(api, '', contract, 'get_owner_token_ids', {}, [
-        activeAccount?.address,
-      ])
-      const { output, isError, decodedOutput } = decodeOutput(
-        result,
-        contract,
-        'get_owner_token_ids',
-      )
-      if (isError) throw new Error(decodedOutput)
-
-      // Alternatively: Fetch it with typed contract instance
       const typedResult = await typedContract.query.getOwnerTokenIds(activeAccount?.address || '')
       console.log('Result from typed contract: ', typedResult)
       setTokenIds(typedResult?.value.ok)
-
       console.log(tokenIds)
     } catch (e) {
       console.error(e)
       toast.error('Error while fetching token ids. Try again…')
-    } finally {
-      fetchTokenById()
-      // setFetchIsLoading(false)
     }
   }
 
   const fetchTokenById = async () => {
-    if (!contract || !typedContract || !api) return
+    if (!contract || !typedContract || !api || !activeAccount?.address) return
 
     try {
-      const result = await contractQuery(api, '', contract, 'get_token_by_id', {}, [
-        tokenIds?.length - 1,
-      ])
-      const { output, isError, decodedOutput } = decodeOutput(result, contract, 'get_token_by_id')
-      if (isError) throw new Error(decodedOutput)
-
-      // Alternatively: Fetch it with typed contract instance
       const typedResult = await typedContract.query.getTokenById(tokenIds?.length - 1)
       console.log('Result from fetchTokenById contract: ', typedResult)
     } catch (e) {
       console.error(e)
       toast.error('Error while fetchingTokenById. Try again…')
-    } finally {
-      // setFetchIsLoading(false)
     }
   }
 
@@ -349,7 +300,7 @@ export function CreateToken() {
 
       console.log(tokenCreate.result)
       console.log(contractAddress)
-      router.push(`/dashboard/contracts/5Dha2roPXs7Wi5oBv5QoKhfeE2A7Ctju5vGW3JMLcj8LaFoe`)
+      toast('Token Created SuccessFully')
       // reset()
       // console.log(supply, name, symbol, decimal)
     } catch (e) {
