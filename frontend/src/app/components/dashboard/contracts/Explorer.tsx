@@ -5,7 +5,10 @@ import { useState } from 'react'
 import { ContractIds } from '@/deployments/deployments'
 import TokenContract from '@inkathon/contracts/typed-contracts/contracts/my_psp'
 import { AccountId } from '@inkathon/contracts/typed-contracts/types-arguments/factory_contract'
-import { useInkathon, useRegisteredTypedContract } from '@scio-labs/use-inkathon'
+import { useContract, useInkathon, useRegisteredTypedContract } from '@scio-labs/use-inkathon'
+import toast from 'react-hot-toast'
+
+import { contractTxWithToast } from '@/utils/contract-tx-with-toast'
 
 import { ExplorerFunctions } from './ExplorerFunctions'
 
@@ -17,6 +20,7 @@ export const Explorer = ({ metadata }: { metadata: any }) => {
   const handleSetCurrentFunction = (id: string) => {
     setCurrentFunction(id)
   }
+  const contract = useContract(tokenAddress.typedContract?.abi, metadata?.address)
 
   const handleBalanceOf = async (address: string): Promise<number> => {
     if (!metadata?.address) return 0
@@ -31,15 +35,33 @@ export const Explorer = ({ metadata }: { metadata: any }) => {
     const result = await tokenAddress.typedContract
       ?.withAddress(`${metadata?.address}`)
       .query.allowance(who as AccountId, spender as AccountId)
+    console.log(result)
     return Number(result?.value.ok)
   }
 
   const handleTransfer = async (to: string, value: string, data: []): Promise<boolean> => {
-    if (!metadata?.address) return false
-    const result = await tokenAddress.typedContract
-      ?.withAddress(`${metadata?.address}`)
-      .query.transfer(to as AccountId, value, data)
-    return result?.value.ok ? true : false
+    if (
+      !metadata?.address ||
+      !api ||
+      !tokenAddress.contract ||
+      !activeAccount?.address ||
+      !contract.contract
+    )
+      return false
+    try {
+      await contractTxWithToast(
+        api,
+        activeAccount?.address,
+        contract.contract,
+        'PSP22::transfer',
+        {},
+        [to as AccountId, value, data],
+      )
+      return true
+    } catch (e: any) {
+      toast.error(`${e.errorMessage}`)
+      return false
+    }
   }
 
   const handleTransferFrom = async (
@@ -48,19 +70,55 @@ export const Explorer = ({ metadata }: { metadata: any }) => {
     value: string,
     data: [],
   ): Promise<boolean> => {
-    if (!metadata?.address) return false
-    const result = await tokenAddress.typedContract
-      ?.withAddress(`${metadata?.address}`)
-      .query.transferFrom(from as AccountId, to as AccountId, value, data)
-    return result?.value.ok ? true : false
+    if (
+      !metadata?.address ||
+      !api ||
+      !tokenAddress.contract ||
+      !activeAccount?.address ||
+      !contract.contract
+    )
+      return false
+    try {
+      await contractTxWithToast(
+        api,
+        activeAccount?.address,
+        contract.contract,
+        'PSP22::transferFrom',
+        {},
+        [from as AccountId, to as AccountId, value, data],
+      )
+      return true
+    } catch (e: any) {
+      toast.error(`${e.errorMessage}`)
+      return false
+    }
   }
 
   const handleApproval = async (spender: string, value: string): Promise<boolean> => {
-    if (!metadata?.address) return false
-    const result = await tokenAddress.typedContract
-      ?.withAddress(`${metadata?.address}`)
-      .query.approve(spender as AccountId, value)
-    return result?.value.ok ? true : false
+    if (
+      !metadata?.address ||
+      !api ||
+      !tokenAddress.contract ||
+      !activeAccount?.address ||
+      !contract.contract
+    )
+      return false
+    try {
+      api.setSigner(activeSigner)
+      await contractTxWithToast(
+        api,
+        activeAccount?.address,
+        contract.contract,
+        'PSP22::approve',
+        {},
+        [spender, value],
+      )
+      return true
+    } catch (e: any) {
+      console.log(e)
+      toast.error(`${e.errorMessage}`)
+      return false
+    }
   }
 
   return (
@@ -186,9 +244,9 @@ export const Explorer = ({ metadata }: { metadata: any }) => {
             </p>
             <small></small>
             {currentFunction === 'transfer' ? (
-              <ExplorerFunctions spender value handleTransfer={handleTransfer} />
+              <ExplorerFunctions to value handleTransfer={handleTransfer} />
             ) : currentFunction === 'approval' ? (
-              <ExplorerFunctions owner spender value handleApproval={handleApproval} />
+              <ExplorerFunctions spender value handleApproval={handleApproval} />
             ) : currentFunction === 'transferFrom' ? (
               <ExplorerFunctions from to value handleTransferFrom={handleTransferFrom} />
             ) : currentFunction === 'allowance' ? (

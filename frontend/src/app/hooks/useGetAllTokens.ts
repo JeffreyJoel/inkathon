@@ -91,6 +91,7 @@ const useGetAllTokens = () => {
     }
     setTokenMetadata(metadatas)
     console.log(metadatas)
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -98,9 +99,7 @@ const useGetAllTokens = () => {
     if (contract && typedContract && api && activeAccount) {
       fetchOwnerTokenIds()
       console.log(tokenIds)
-      // getContractMetadata()
     }
-    setIsLoading(false)
   }, [typedContract, contract, typedContract, api, activeAccount])
 
   //   return tokenMetadata

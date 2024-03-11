@@ -21,9 +21,10 @@ BADGER is an innovative no-code application built for the Encode x Polkadot 24Q1
 ## How It Works
 
 1. **User Registration**: Users sign up and log into the platform.
-2. **Token Configuration**: Users select the type of token they wish to create and configure its properties.
-3. **Deployment**: The tokens are deployed to the chosen Substrate blockchain.
-4. **Management**: Users can manage their tokens within the platform.
+2. **Get Faucet Tokens**: For the sake of the demo we are using the aleph zero network so get the testnet token from this (faucet)[https://faucet.test.azero.dev/]
+3. **Token Configuration**: Users select the type of token they wish to create and configure its properties.
+4. **Deployment**: The tokens are deployed to the chosen Substrate blockchain.
+5. **Management**: Users can manage their tokens within the platform.
 
 ## Installation
 

@@ -45,7 +45,7 @@ export function ContractOverview({
         <div className="mr-8 block w-full max-w-sm cursor-pointer rounded-lg border border-gray-600 p-5 shadow">
           <h5 className="mb-2 text-xl font-normal tracking-tight text-white">Owned by you</h5>
           <p className="text-xl font-normal text-gray-100">
-            {supply} {symbol}
+            {userBalance} {symbol}
           </p>
         </div>
         <div className="mr-8 block w-full max-w-sm cursor-pointer rounded-lg border border-gray-600 p-5 shadow">

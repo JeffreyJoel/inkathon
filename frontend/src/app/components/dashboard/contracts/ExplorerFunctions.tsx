@@ -37,15 +37,66 @@ export const ExplorerFunctions = ({
   handleTransfer?: (to: string, value: string, data: []) => Promise<boolean>
   handleTransferFrom?: (from: string, to: string, value: string, data: []) => Promise<boolean>
 }) => {
-  const [tab, setTab] = useState(0)
-  const [currentFunction, setCurrentFunction] = useState('')
+  const [isResult, setIsResult] = useState(false)
+  const [result, setResult] = useState<any>('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [inputValues, setInputValues] = useState({
+    from: '',
+    owner: '',
+    to: '',
+    spender: '',
+    value: '',
+    who: '',
+  })
 
-  const handleRun = () => {
+  const handleRun = async () => {
+    setIsLoading(true)
     // handleAllowance && handleAllowance()
+    if (handleAllowance) {
+      const result = await handleAllowance(inputValues.who, inputValues.spender)
+      setResult(result)
+      setIsResult(true)
+      setIsLoading(false)
+    }
     // handleApproval && handleApproval()
+    if (handleApproval) {
+      const result = await handleApproval(inputValues.spender, inputValues.value)
+      setResult(result)
+      setIsResult(true)
+      setIsLoading(false)
+    }
     // handleBalanceOf && handleBalanceOf()
+    if (handleBalanceOf) {
+      const result = await handleBalanceOf(inputValues.who)
+      setResult(result)
+      setIsResult(true)
+      setIsLoading(false)
+    }
     // handleTransfer && handleTransfer()
+    if (handleTransfer) {
+      const result = await handleTransfer(inputValues.to, inputValues.value, [])
+      setResult(result)
+      setIsResult(true)
+      setIsLoading(false)
+    }
     // handleTransferFrom && handleTransferFrom()
+    if (handleTransferFrom) {
+      const result = await handleTransferFrom(
+        inputValues.from,
+        inputValues.to,
+        inputValues.value,
+        [],
+      )
+      setResult(result)
+      setIsResult(true)
+      setIsLoading(false)
+    }
+  }
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target
+    setInputValues({ ...inputValues, [name]: value })
+    setIsResult(false)
   }
 
   return (
@@ -53,10 +104,17 @@ export const ExplorerFunctions = ({
       <div className="mt-5">
         {owner ? (
           <div className="mb-5 items-center gap-4">
-            <Label htmlFor="description" className="text-right text-lg capitalize text-gray-100">
+            <Label htmlFor="owner" className="text-right text-lg capitalize text-gray-100">
               owner
             </Label>
-            <Input id="description" value="" placeholder="address" className="mt-2" />
+            <Input
+              name="owner"
+              id="owner"
+              value={inputValues.owner}
+              onChange={handleChange}
+              placeholder="address"
+              className="mt-2"
+            />
           </div>
         ) : (
           ''
@@ -64,10 +122,17 @@ export const ExplorerFunctions = ({
 
         {from ? (
           <div className="mb-5 items-center gap-4">
-            <Label htmlFor="description" className="text-right text-lg capitalize text-gray-100">
+            <Label htmlFor="from" className="text-right text-lg capitalize text-gray-100">
               from
             </Label>
-            <Input id="" value="" placeholder="address" className="mt-2" />
+            <Input
+              name="from"
+              id="from"
+              value={inputValues.from}
+              onChange={handleChange}
+              placeholder="address"
+              className="mt-2"
+            />
           </div>
         ) : (
           ''
@@ -75,10 +140,17 @@ export const ExplorerFunctions = ({
 
         {to ? (
           <div className="mb-5 items-center gap-4">
-            <Label htmlFor="description" className="text-right text-lg capitalize text-gray-100">
+            <Label htmlFor="to" className="text-right text-lg capitalize text-gray-100">
               to
             </Label>
-            <Input id="description" value="" placeholder="address" className="mt-2" />
+            <Input
+              name="to"
+              id="to"
+              value={inputValues.to}
+              onChange={handleChange}
+              placeholder="address"
+              className="mt-2"
+            />
           </div>
         ) : (
           ''
@@ -86,10 +158,17 @@ export const ExplorerFunctions = ({
 
         {spender ? (
           <div className="mb-5 items-center gap-4">
-            <Label htmlFor="description" className="text-right text-lg capitalize text-gray-100">
+            <Label htmlFor="spender" className="text-right text-lg capitalize text-gray-100">
               spender
             </Label>
-            <Input id="description" value="" placeholder="address" className="mt-2" />
+            <Input
+              name="spender"
+              id="spender"
+              value={inputValues.spender}
+              onChange={handleChange}
+              placeholder="address"
+              className="mt-2"
+            />
           </div>
         ) : (
           ''
@@ -97,10 +176,18 @@ export const ExplorerFunctions = ({
 
         {value ? (
           <div className="mb-5 items-center gap-4">
-            <Label htmlFor="description" className="text-right text-lg capitalize text-gray-100">
+            <Label htmlFor="value" className="text-right text-lg capitalize text-gray-100">
               value
             </Label>
-            <Input id="description" value="" placeholder="uint256" className="mt-2" />
+            <Input
+              name="value"
+              id="value"
+              type="number"
+              value={inputValues.value}
+              onChange={handleChange}
+              placeholder="uint256"
+              className="mt-2"
+            />
           </div>
         ) : (
           ''
@@ -108,10 +195,17 @@ export const ExplorerFunctions = ({
 
         {who ? (
           <div className="mb-5 items-center gap-4">
-            <Label htmlFor="description" className="text-right text-lg capitalize text-gray-100">
+            <Label htmlFor="who" className="text-right text-lg capitalize text-gray-100">
               who
             </Label>
-            <Input id="description" value="" placeholder="address" className="mt-2" />
+            <Input
+              name="who"
+              id="who"
+              value={inputValues.who}
+              onChange={handleChange}
+              placeholder="address"
+              className="mt-2"
+            />
           </div>
         ) : (
           ''
@@ -131,15 +225,35 @@ export const ExplorerFunctions = ({
           ''
         )}
 
-        <Button
-          // type="submit"
-          onClick={() => {
-            // createToken(inputValues)
-            handleRun()
-          }}
-        >
-          Run
-        </Button>
+        {!view && (
+          <>
+            {isResult && (
+              <div className="mb-5 items-center gap-4">
+                <Label htmlFor="Result" className="text-right text-lg capitalize text-gray-100">
+                  Result
+                </Label>
+                <Input
+                  name="Result"
+                  id="Result"
+                  readOnly={true}
+                  value={result}
+                  placeholder="Result"
+                  className="mt-2"
+                />
+              </div>
+            )}
+            <Button
+              // type="submit"
+              onClick={() => {
+                handleRun()
+              }}
+              disabled={isLoading}
+              isLoading={isLoading}
+            >
+              Run
+            </Button>
+          </>
+        )}
       </div>
     </>
   )
